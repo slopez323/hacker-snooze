@@ -17,10 +17,10 @@ async function getDetails(id){
 };
 
 function createList(details){
-    let itemNum = `<span class="itemNum">${count}. </span>`
-    let newItemTitle = `<span><a class="itemTitle" href="${details.url}">${details.title}</a></span>`
-    let newItemDesc = `<p class="itemDesc">${details.score} points by ${details.by} | ${details.descendants} comments</p>`
-    $('.storyList').append(`<div>${itemNum}${newItemTitle}${newItemDesc}</div>`)
+    let itemNum = `<td class="itemNum">${count}. </td>`
+    let newItemTitle = `<td class="titleParent"><a class="itemTitle" href="${details.url}">${details.title}</a></td>`
+    let newItemDesc = `<td class="itemDesc">${details.score} points by ${details.by} | ${details.descendants} comments</td>`
+    $('table').append(`<tr>${itemNum}${newItemTitle}</tr><tr><td></td>${newItemDesc}</tr>`)
     count++;
 };
 
