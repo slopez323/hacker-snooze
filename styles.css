@@ -11,12 +11,21 @@ header{
     background-color: #023047;
     color: aliceblue;
     padding: 10px;
-    font-size: 40px;
     font-family: 'BIZ UDPMincho', serif;
+    
+    display: flex;
+    align-items: center;
 }
 
 h3{
-    margin: 0;
+    margin: 5px 0;
+    font-size: 40px;
+    display: inline-block;
+}
+
+nav{
+    display: inline-block;
+    margin-left: 30px;
 }
 
 .itemTitle {
@@ -49,7 +58,7 @@ h3{
     color: #fff;
     background-color: #adb5bd;
     border-color: #adb5bd;
-    padding: 2px;
+    padding: 2px 5px;
     border-radius: 2px;
 }
 
@@ -61,8 +70,8 @@ h3{
 .storyItem{
     display: grid;
     grid-template-columns: 30px auto;
-    grid-template-rows: 1fr 1fr auto;
-    border-bottom: 1px solid #023047;
+    grid-template-rows: min-content min-content auto;
+    border-bottom: 1px solid #e8e8e4;
 }
 
 .itemNum{
@@ -86,7 +95,7 @@ h3{
 
     color: #335c67;
     font-size: 12px;
-    margin: 0;
+    margin: 0 0 5px 0;
     width: 100%;
 }
 
@@ -98,13 +107,8 @@ h3{
 }
 
 @media screen and (max-width: 768px) {
-    *{
+    body{
         font-size: 14px;
-    }
-    .container{
-        padding:0;
-        margin: 0;
-        max-width:100vw;
     }
     header{
         background-color: #eaac8b;

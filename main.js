@@ -1,11 +1,18 @@
 let topIDs = [];
-let count = 1;
+let storyCount = 1;
+let askCount = 1;
 let dataComments = [];
 
 async function getTopIDs() {
-    let httpResponse = await fetch('https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty')
-    topIDs = await httpResponse.json();
-    top100();
+    if ($('#story-tab').hasClass('active')) {
+        let httpResponse = await fetch('https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty')
+        topIDs = await httpResponse.json();
+        top100();
+    } else {
+        let httpResponse = await fetch('https://hacker-news.firebaseio.com/v0/askstories.json?print=pretty')
+        topIDs = await httpResponse.json();
+        top100();
+    };
 };
 
 getTopIDs();
@@ -16,7 +23,7 @@ function top100() {
     };
 };
 
-$('.storyList').on('click', '.showComment', (e) => {
+$('.tab-content').on('click', '.showComment', (e) => {
     const parentdiv = $(e.target).parent().parent();
     const storyID = $(e.target).attr("data-story-id");
 
@@ -35,11 +42,21 @@ async function getDetails(id) {
 };
 
 function createList(details) {
-    let itemNum = `<span class="itemNum">${count}. </span>`
+    let itemNum;
+    if ($('#story-tab').hasClass('active')) {
+        itemNum = `<span class="itemNum">${storyCount}. </span>`
+    } else {
+        itemNum = `<span class="itemNum">${askCount}. </span>`
+    };
     let newItemTitle = `<span class="titleParent"><a class="itemTitle" href="${details.url}">${details.title}</a></span>`
     let newItemDesc = `<p class="itemDesc">${details.score} points by ${details.by} | <span class="showComment" data-story-id="${details.id}">${details.descendants} comments</span></p>`
-    $('.storyList').append(`<div class="storyItem">${itemNum}${newItemTitle}${newItemDesc}</div>`)
-    count++;
+    if ($('#story-tab').hasClass('active')) {
+        $('.storyList').append(`<div class="storyItem">${itemNum}${newItemTitle}${newItemDesc}</div>`)
+        storyCount++;
+    } else {
+        $('.askList').append(`<div class="storyItem">${itemNum}${newItemTitle}${newItemDesc}</div>`)
+        askCount++;
+    };
 };
 
 
@@ -55,3 +72,6 @@ async function showComments(parentdiv, storyID) {
     };
 };
 
+$('#ask-tab').on('click', function(){
+    if(askCount == 1) getTopIDs();
+});
