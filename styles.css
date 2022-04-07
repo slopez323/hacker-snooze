@@ -37,6 +37,7 @@ nav{
 
 
 .itemTitle:hover{
+    cursor: pointer;
     color: #e56b6f;
 }
 
@@ -44,6 +45,18 @@ nav{
     font-size: 10px;
     margin: 20px 10px 0 10px;
     color: #9d8189;
+}
+
+.askTextDiv{
+    font-size: 15px;
+    font-weight: 500;
+    color:#457b9d;
+    border-bottom: 1px solid gainsboro;
+    font-family:'Courier New', Courier, monospace;
+}
+
+.askTextDiv *{
+    margin: 8px 5px 10px 5px;
 }
 
 .commentText, .commentText *{
@@ -131,7 +144,14 @@ nav{
         font-size: 14px;
     }
     header{
-        background-color: #eaac8b;
+        background-color: #457b9d;
         color: #6d597a;
+    }
+    h3{
+        font-size: 30px;
+    }
+    .nav{
+        gap: 5px;
+        justify-content: center;
     }
 }
