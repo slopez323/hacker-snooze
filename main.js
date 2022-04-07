@@ -3,23 +3,23 @@ let storyCount = 1;
 let askCount = 1;
 let dataComments = [];
 
-async function getTopIDs() {
-    if ($('#story-tab').hasClass('active')) {
+async function getTopIDs(type) {
+    if (type == 'story') {
         let httpResponse = await fetch('https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty')
         topIDs = await httpResponse.json();
-        top100();
+        top100('story');
     } else {
         let httpResponse = await fetch('https://hacker-news.firebaseio.com/v0/askstories.json?print=pretty')
         topIDs = await httpResponse.json();
-        top100();
+        top100('ask');
     };
 };
 
-getTopIDs();
+getTopIDs('story');
 
-function top100() {
+function top100(type) {
     for (let i = 0; i < 100; i++) {
-        getDetails(topIDs[i]);
+        getDetails(type, topIDs[i]);
     };
 };
 
@@ -34,23 +34,23 @@ $('.tab-content').on('click', '.showComment', (e) => {
     };
 });
 
-async function getDetails(id) {
+async function getDetails(type, id) {
     let details = await fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`)
     details = await details.json();
     dataComments.push({ id, comments: details.kids });
-    createList(details);
+    createList(type, details);
 };
 
-function createList(details) {
+function createList(type, details) {
     let itemNum;
-    if ($('#story-tab').hasClass('active')) {
+    if (type == 'story') {
         itemNum = `<span class="itemNum">${storyCount}. </span>`
     } else {
         itemNum = `<span class="itemNum">${askCount}. </span>`
     };
     let newItemTitle = `<span class="titleParent"><a class="itemTitle" href="${details.url}">${details.title}</a></span>`
-    let newItemDesc = `<p class="itemDesc">${details.score} points by ${details.by} | <span class="showComment" data-story-id="${details.id}">${details.descendants} comments</span></p>`
-    if ($('#story-tab').hasClass('active')) {
+    let newItemDesc = `<p class="itemDesc">${details.score} points by ${details.by} <span class="showComment" data-story-id="${details.id}">${details.descendants} comments</span></p>`
+    if (type == 'story') {
         $('.storyList').append(`<div class="storyItem">${itemNum}${newItemTitle}${newItemDesc}</div>`)
         storyCount++;
     } else {
@@ -73,5 +73,5 @@ async function showComments(parentdiv, storyID) {
 };
 
 $('#ask-tab').on('click', function(){
-    if(askCount == 1) getTopIDs();
+    if(askCount == 1) getTopIDs('ask');
 });

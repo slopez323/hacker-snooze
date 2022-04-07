@@ -1,5 +1,5 @@
 body{
-    font-family: 'Newsreader', serif;
+    font-family: 'Roboto Condensed', sans-serif;
     font-size: 18px;
 }
 
@@ -8,19 +8,21 @@ body{
 }
 
 header{
-    background-color: #023047;
-    color: aliceblue;
-    padding: 10px;
-    font-family: 'BIZ UDPMincho', serif;
+    background-color: #390099;
+    padding: 10px 20px;
+    border-radius: 5px;
     
     display: flex;
     align-items: center;
 }
 
 h3{
-    margin: 5px 0;
+    margin: 8px 0 5px 0;
     font-size: 40px;
     display: inline-block;
+    color: #ffbd00;
+    text-transform: uppercase;
+    font-family: 'Coda', cursive;
 }
 
 nav{
@@ -72,6 +74,8 @@ nav{
     grid-template-columns: 30px auto;
     grid-template-rows: min-content min-content auto;
     border-bottom: 1px solid #e8e8e4;
+
+    padding: 5px 0;
 }
 
 .itemNum{
@@ -104,6 +108,22 @@ nav{
     grid-row-start: 3;
     padding-bottom: 20px;
     background-color: #e8e8e4;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+    background-color: #ff0054;
+}
+
+.nav-link{
+    color: #ff0054;
+}
+
+.nav-link:hover{
+    color: #9e0059;
+}
+
+.storyItem:nth-child(even){
+    background-color: #eff7f6;
 }
 
 @media screen and (max-width: 768px) {
